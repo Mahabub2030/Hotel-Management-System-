@@ -1,4 +1,4 @@
-# stayVista-starter-template
+# Hotel Management System
 
 - [Live Site](https://stayvista-live.web.app/)
 
