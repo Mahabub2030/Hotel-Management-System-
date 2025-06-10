@@ -90,9 +90,9 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Hello from StayVista Server..");
+  res.send("Hello from Hotel Managment Server..");
 });
 
 app.listen(port, () => {
-  console.log(`StayVista is running on port ${port}`);
+  console.log(`Hotel Managment Server is running on port ${port}`);
 });
