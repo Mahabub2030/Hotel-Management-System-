@@ -1,19 +1,20 @@
 
-import Card from './Card'
+import { useQuery } from '@tanstack/react-query'
 import Container from '../Shared/Container'
 import Heading from '../Shared/Heading'
 import LoadingSpinner from '../Shared/LoadingSpinner'
-import { useQuery } from '@tanstack/react-query'
-import useAxiosSecure from '../../hooks/useAxiosSecure'
+import Card from './Card'
+import useAxiosCommon from '../../hooks/useAxiosCommon'
 
 const Rooms = () => {
-  const axiosScecure = useAxiosSecure()
+  const axiosCommon = useAxiosCommon();
+
 
   // start
   const { data: rooms = [], isLoading } = useQuery({
     queryKey: ['rooms'],
     queryFn: async () => {
-      const { data } = await axiosScecure.get("/rooms");
+      const { data } = await axiosCommon.get("/rooms");
       return data
     },
   });
