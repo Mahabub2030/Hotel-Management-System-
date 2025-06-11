@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const CategoryBox = ({ label, icon: Icon }) => {
   const navigate = useNavigate()
   const handelClick = () => {
-    let currentQuery = { categoriey: label };
+    let currentQuery = { category: label };
     const url = queryString.stringifyUrl({
       url: "/",
       query: currentQuery,
