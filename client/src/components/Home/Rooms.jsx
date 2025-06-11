@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+
 import Card from './Card'
 import Container from '../Shared/Container'
 import Heading from '../Shared/Heading'
@@ -8,29 +8,18 @@ import useAxiosSecure from '../../hooks/useAxiosSecure'
 
 const Rooms = () => {
   const axiosScecure = useAxiosSecure()
-  const [rooms, setRooms] = useState([])
-  const [loading, setLoading] = useState(false)
+
   // start
-  const { data } = useQuery({
+  const { data: rooms = [], isLoading } = useQuery({
     queryKey: ['rooms'],
     queryFn: async () => {
-      const {data} = await axiosScecure.get('/rooms')
-      console.log(data)
-    }
-  })
+      const { data } = await axiosScecure.get("/rooms");
+      return data
+    },
+  });
   // ends
 
-  useEffect(() => {
-    setLoading(true)
-    fetch(`./rooms.json`)
-      .then(res => res.json())
-      .then(data => {
-        setRooms(data)
-        setLoading(false)
-      })
-  }, [])
-
-  if (loading) return <LoadingSpinner />
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <Container>
