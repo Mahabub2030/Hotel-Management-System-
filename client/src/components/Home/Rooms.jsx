@@ -5,17 +5,24 @@ import Heading from '../Shared/Heading'
 import LoadingSpinner from '../Shared/LoadingSpinner'
 import Card from './Card'
 import useAxiosCommon from '../../hooks/useAxiosCommon'
+import { useSearchParams } from 'react-router-dom'
 
 const Rooms = () => {
   const axiosCommon = useAxiosCommon();
+  // eslint-disable-next-line no-unused-vars
+  const [params, setParams] = useSearchParams();
+  const categoriey = params.get("categoriey");
+  console.log(categoriey)
 
 
   // start
   const { data: rooms = [], isLoading } = useQuery({
-    queryKey: ['rooms'],
+    queryKey: ["rooms", categoriey],
     queryFn: async () => {
-      const { data } = await axiosCommon.get("/rooms");
-      return data
+      const { data } = await axiosCommon.get(
+        `/rooms?categoriey=${categoriey} `
+      );
+      return data;
     },
   });
   // ends
