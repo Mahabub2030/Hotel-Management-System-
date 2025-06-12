@@ -1,8 +1,12 @@
 import PropTypes from "prop-types";
 import queryString from "query-string";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const CategoryBox = ({ label, icon: Icon }) => {
+  const [params, setParams] = useSearchParams()
+  const category = params.get('category');
+ 
+
   const navigate = useNavigate()
   const handelClick = () => {
     let currentQuery = { category: label };
@@ -15,8 +19,8 @@ const CategoryBox = ({ label, icon: Icon }) => {
   };
   return (
     <div
-      onClick={handelClick}
-      className={`flex 
+  onClick={handelClick}
+  className={`flex 
   flex-col 
   items-center 
   justify-center 
@@ -25,7 +29,9 @@ const CategoryBox = ({ label, icon: Icon }) => {
   border-b-2
   hover:text-neutral-800
   transition
-  cursor-pointer`}
+  cursor-pointer ${
+  category === label && "border-b-neutral-800 text-neutral-800"
+  } `}
     >
       <Icon size={26} />
       <div className="text-sm font-medium">{label}</div>
