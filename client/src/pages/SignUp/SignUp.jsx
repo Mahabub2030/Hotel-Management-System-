@@ -53,6 +53,21 @@ const SignUp = () => {
    }
   };
 
+  // google sign
+  const handelGoogleSigIn = async () => {
+    try {
+      setLoading(true);
+      await signInWithGoogle();
+    
+      navigate("/");
+      toast.success("SigninWith Google Successfully ");
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
+    }
+    
+  }
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
@@ -130,7 +145,11 @@ const SignUp = () => {
               type="submit"
               className="bg-rose-500 w-full rounded-md py-3 text-white"
             >
-              {loading ? <CgSpinnerTwo className="animate-spin m-auto" /> : "Continue"}
+              {loading ? (
+                <CgSpinnerTwo className="animate-spin m-auto text-xl" />
+              ) : (
+                "Continue"
+              )}
             </button>
           </div>
         </form>
@@ -141,7 +160,11 @@ const SignUp = () => {
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
-        <div className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer">
+        <div
+          disabled={loading}
+          onClick={handelGoogleSigIn}
+          className="disabled:cursor-not-allowed  flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
+        >
           <FcGoogle size={32} />
 
           <p>Continue with Google</p>
