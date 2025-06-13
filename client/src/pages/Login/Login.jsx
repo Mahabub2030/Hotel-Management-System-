@@ -3,16 +3,19 @@ import { FcGoogle } from 'react-icons/fc'
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { CgSpinnerTwo } from "react-icons/cg";
+import { useState } from 'react';
 
 const Login = () => {
   const navigate = useNavigate();
-  const {  signInWithGoogle,signIn, loading, setLoading } =
+  const { signInWithGoogle, signIn, loading, setLoading, resetPassword } =
     useAuth();
+  const [email, setEmail] = useState('');
     const handelSubmit = async (e) => {
       e.preventDefault();
 
       const form = e.target;
       const email = form.email.value;
+    
       const password = form.password.value;
   
      
@@ -24,9 +27,21 @@ const Login = () => {
       } catch (err) {
         console.log(err);
         toast.error(err.message);
+        setLoading(false);
       }
-    };
+  };
+  const handeResetPasswrod = async () => {
+    if (!email) return toast.error("Please wright your email !!!");
+    try {
+      await resetPassword(email)
+      toast.success("Check your link please");
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
+    }
 
+  }
   // google sign
   const handelGoogleSigIn = async () => {
     try {
@@ -40,6 +55,7 @@ const Login = () => {
       toast.error(err.message);
     }
   };
+
 
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -62,6 +78,7 @@ const Login = () => {
               <input
                 type="email"
                 name="email"
+               onBlur={e => setEmail(e.target.value)}
                 id="email"
                 required
                 placeholder="Enter Your Email Here"
@@ -102,7 +119,10 @@ const Login = () => {
           </div>
         </form>
         <div className="space-y-1">
-          <button className="text-xs hover:underline hover:text-rose-500 text-gray-400">
+          <button
+            onClick={handeResetPasswrod}
+            className="text-xs hover:underline hover:text-rose-500 text-gray-400"
+          >
             Forgot password?
           </button>
         </div>
@@ -136,4 +156,4 @@ const Login = () => {
   );
 }
 
-export default Login
+  export default Login;
