@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import toast from "react-hot-toast"
 import { CgSpinnerTwo } from "react-icons/cg";
+import { imageUplode } from "../../api/utils";
 
 const SignUp = () => {
   const navigate = useNavigate()
@@ -23,25 +24,19 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     const image = form.image.files[0]
-    const formData = new FormData()
-    formData.append("image", image);
+    
   
     try {
       setLoading(true)
       // 1.uplode image to imgbb Ui
-      const { data } = await axios.post(
-        `https://api.imgbb.com/1/upload?key=${
-          import.meta.env.VITE_IMGBB_API_KEY
-        }`,
-        formData
-      );
-      console.log(data.data.display_url);
+       const imge_url = await imageUplode(image);
+              console.log(imge_url)
 
       // 2.singup registertion user
       const result = await createUser(email, password)
       console.log(result)
       // 3.save user to firbase
-      await updateUserProfile(name, data.data.display_url)
+      await updateUserProfile(name, imge_url);
       navigate('/')
       toast.success("Sign Successfully Done")
 
