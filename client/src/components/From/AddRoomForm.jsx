@@ -2,6 +2,7 @@ import { categories } from "../Categories/CategoriesData";
 import { DateRange } from "react-date-range";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
+import { CgSpinnerTwo } from "react-icons/cg";
 const AddRoomForm = ({
   dates,
   handelDates,
@@ -10,6 +11,7 @@ const AddRoomForm = ({
   imagePreview,
   handleImage,
   imageText,
+  loading,
 }) => {
   const [state, setState] = useState([
     {

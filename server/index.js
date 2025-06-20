@@ -90,24 +90,13 @@ async function run() {
     });
     // save a room data in db
     // Save a room data in db
-    app.post("/room", verifyToken, verifyHost, async (req, res) => {
+    app.post("/room", verifyToken, async (req, res) => {
       const roomData = req.body;
       const result = await roomsCollection.insertOne(roomData);
       res.send(result);
     });
     // get all rooms for host
-    app.get(
-      "/my-listings/:email",
-      verifyToken,
-      verifyHost,
-      async (req, res) => {
-        const email = req.params.email;
-
-        let query = { "host.email": email };
-        const result = await roomsCollection.find(query).toArray();
-        res.send(result);
-      }
-    );
+ 
 
     // get singal roomes data from db
     app.get("/room/:id", async (req, res) => {
