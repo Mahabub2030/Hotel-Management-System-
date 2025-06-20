@@ -41,8 +41,6 @@ const AddRoom = () => {
   })
 
 
-
-
   // form handler
   //   Form handler
   const handleSubmit = async (e) => {

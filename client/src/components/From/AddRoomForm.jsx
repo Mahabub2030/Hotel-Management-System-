@@ -2,7 +2,6 @@ import { categories } from "../Categories/CategoriesData";
 import { DateRange } from "react-date-range";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
-import { CgSpinnerTwo } from "react-icons/cg";
 const AddRoomForm = ({
   dates,
   handelDates,
@@ -11,8 +10,6 @@ const AddRoomForm = ({
   imagePreview,
   handleImage,
   imageText,
-  loading,
-  setLoading,
 }) => {
   const [state, setState] = useState([
     {
@@ -193,7 +190,6 @@ const AddRoomForm = ({
           </div>
 
           <button
-            disabled={loading}
             type="submit"
             className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500"
           >
