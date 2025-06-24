@@ -19,6 +19,7 @@ const CategoryBox = ({ label, icon: Icon }) => {
 
     // 2. Set query string in url
     navigate(url);
+    // console.log(url)
   };
   return (
     <div
