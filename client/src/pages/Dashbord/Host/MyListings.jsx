@@ -86,7 +86,7 @@ const MyListings = () => {
                 <tbody>
                   {/* room row data */}
                   {rooms.map((room) => (
-                    <RoomDataRow key={room._id} romm={room} refetch={refetch} />
+                    <RoomDataRow key={room._id} room={room} refetch={refetch} />
                   ))}
                 </tbody>
               </table>
