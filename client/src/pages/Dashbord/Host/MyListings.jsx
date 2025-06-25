@@ -3,16 +3,19 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
+import RoomDataRow from "../../../components/Dashboard/SideBar/TabelRow/RoomDataRow";
 // import useAxiosSecure from "../../../hooks/useAxiosSecure";
 // import { useMutation} from "@tanstack/react-query";
 
-
 const MyListings = () => {
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
-  const {user} = useAuth()
-  const axiosSecure = useAxiosSecure()
- 
-  const { data: rooms = [], isLoading } = useQuery({
+  const {
+    data: rooms = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["my-listings", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/my-listings/${user?.email}`);
@@ -20,10 +23,8 @@ const MyListings = () => {
       return data;
     },
   });
-  console.log(rooms)
-   if (isLoading) return <LoadingSpinner />;
- 
-
+  console.log(rooms);
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <>
@@ -83,8 +84,9 @@ const MyListings = () => {
                   </tr>
                 </thead>
                 <tbody>
+                  {/* room row data */}
                   {rooms.map((room) => (
-                    <p key={room._id}>{room.title}</p>
+                    <RoomDataRow key={room._id} romm={room} refetch={refetch} />
                   ))}
                 </tbody>
               </table>
