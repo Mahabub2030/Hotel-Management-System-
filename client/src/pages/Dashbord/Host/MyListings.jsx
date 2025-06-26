@@ -28,26 +28,23 @@ const MyListings = () => {
   console.log(rooms);
 
   // delete 
-  const { muateAsync } = useMutation({
-    mutationFn: async id => {
-      const { data } = await axiosSecure.delete(`/room/${id}`)
-      
-      return data
+  const { mutateAsync } = useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axiosSecure.delete(`/room/${id}`);
+
+      return data;
     },
     onSuccess: (data) => {
-      console.log(data)
-      toast.success('data delete success')
-    }
-  })
-
-
-
+      console.log(data);
+      toast.success("Data delete successfully");
+    },
+  });
   // hendel delete
 
   const handelDelete =  async id => {
     console.log(id)
     try {
-      await muateAsync(id)
+      await mutateAsync(id);
       
     } catch (err) {
       console.log(err)
@@ -55,7 +52,6 @@ const MyListings = () => {
     }
     
   }
-
 
 
   if (isLoading) return <LoadingSpinner />;
