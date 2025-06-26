@@ -24,8 +24,6 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     const image = form.image.files[0]
-    
-  
     try {
       setLoading(true)
       // 1.uplode image to imgbb Ui
@@ -46,7 +44,6 @@ const SignUp = () => {
       setLoading(false);
    }
   };
-
   // google sign
   const handelGoogleSigIn = async () => {
     try {
@@ -61,7 +58,6 @@ const SignUp = () => {
     }
     
   }
-
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">

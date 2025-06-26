@@ -6,6 +6,7 @@ import { CgSpinnerTwo } from "react-icons/cg";
 import { useState } from 'react';
 
 const Login = () => {
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state || ('/')
@@ -17,10 +18,7 @@ const Login = () => {
 
       const form = e.target;
       const email = form.email.value;
-    
       const password = form.password.value;
-  
-     
       try {
         setLoading(true);
         await signIn(email,password);
@@ -49,7 +47,6 @@ const Login = () => {
     try {
       setLoading(true);
       await signInWithGoogle();
-
       navigate("/");
       toast.success("SigninWith Google Successfully ");
     } catch (err) {

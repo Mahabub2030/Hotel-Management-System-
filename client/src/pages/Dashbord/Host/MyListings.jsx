@@ -36,6 +36,7 @@ const MyListings = () => {
     },
     onSuccess: (data) => {
       console.log(data);
+      refetch()
       toast.success("Data delete successfully");
     },
   });
