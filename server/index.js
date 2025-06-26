@@ -105,6 +105,14 @@ async function run() {
 });
 
 
+    
+    // detete a room
+    app.delete('/room/:id', async (req, res) => {
+      const id = req.params.id
+      const qurey = { _id: new ObjectId(id) }
+      const result = await roomsCollection.deleteOne(qurey)
+      res.send(result)
+    })
 
     // get singal roomes data from db
     app.get("/room/:id", async (req, res) => {
